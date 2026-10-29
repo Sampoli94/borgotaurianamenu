@@ -1,5 +1,22 @@
 <!DOCTYPE html>
+<!-- Menu digitale di Borgo Tauriana: le pagine si sfogliano a schermo intero con il dito o con le frecce.
+     Piatti e prezzi si cambiano nelle pagine create con addPage() nello script.
+     
+     Indice delle sezioni:
+       1. Intestazione e stile di base
+       2. Stile: copertina e titoli
+       3. Stile: piatti, note, contatti e allergeni
+       4. Stile: pulsanti per sfogliare
+       5. Struttura della pagina
+       6. Pagine: copertina e antipasti
+       7. Pagine: pizze
+       8. Pagine: bevande, vini e liquori
+       9. Pagine: dessert, contatti e allergeni
+       10. Disegno delle pagine e sfoglio
+       11. Trascinamento con il dito e tastiera -->
+
 <html lang="it">
+<!-- Sezione 1 - Intestazione e stile di base -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -123,6 +140,7 @@
     padding: 24px 0;
   }
 
+  /* Sezione 2 - Stile: copertina e titoli */
   /* ---------- Cover ---------- */
   .cover{ justify-content:space-between; text-align:center; padding-top: max(64px, env(safe-area-inset-top)); padding-bottom: max(64px, env(safe-area-inset-bottom)); }
   .cover .cover-top, .cover .cover-bottom{ width:100%; }
@@ -194,6 +212,7 @@
     font-family:'Fraunces', serif;
   }
 
+  /* Sezione 3 - Stile: piatti, note, contatti e allergeni */
   /* ---------- Menu items ---------- */
   .item{
     padding: 16px 0;
@@ -306,6 +325,7 @@
   }
   .allergen .lbl{ font-size:0.86rem; color: var(--ink); line-height:1.25; }
 
+  /* Sezione 4 - Stile: pulsanti per sfogliare */
   /* ---------- Nav UI ---------- */
   #pagecount{
     position: fixed; top: max(16px, env(safe-area-inset-top));
@@ -372,6 +392,7 @@
   }
 </style>
 </head>
+<!-- Sezione 5 - Struttura della pagina -->
 <body>
 
 <div id="stage">
@@ -392,6 +413,7 @@
 </div>
 
 <script>
+// Sezione 6 - Pagine: copertina e antipasti
 const pagesData = [];
 
 function addPage(html){ pagesData.push(html); }
@@ -439,6 +461,7 @@ addPage(`
   </div>
 `);
 
+// Sezione 7 - Pagine: pizze
 /* 3. PIZZE CLASSICHE */
 addPage(`
   <div class="page">
@@ -513,6 +536,7 @@ addPage(`
   </div>
 `);
 
+// Sezione 8 - Pagine: bevande, vini e liquori
 /* 6. BEVANDE */
 addPage(`
   <div class="page">
@@ -590,6 +614,7 @@ addPage(`
   </div>
 `);
 
+// Sezione 9 - Pagine: dessert, contatti e allergeni
 /* 9. DESSERT */
 addPage(`
   <div class="page">
@@ -680,6 +705,7 @@ addPage(`
   </div>
 `);
 
+// Sezione 10 - Disegno delle pagine e sfoglio
 /* -------- RENDER (effetto sfoglia libro) -------- */
 const track = document.getElementById('track');
 track.innerHTML = pagesData.join('');
@@ -753,6 +779,7 @@ document.getElementById('startBtn').addEventListener('click', ()=>goTo(1));
 
 /* trascinamento: rileva l'intenzione orizzontale e sfoglia in avanti/indietro,
    lasciando libero lo scroll verticale dentro ogni pagina */
+// Sezione 11 - Trascinamento con il dito e tastiera
 let dragging = false, lockedAxis = null, startX = 0, startY = 0;
 
 function dragStart(x, y){
